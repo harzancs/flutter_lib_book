@@ -9,7 +9,7 @@ class HomeScrern extends StatefulWidget {
 
 class DrawerItem {
   String title;
-  AssetImage icon;
+  Icon icon;
   DrawerItem(this.title, this.icon);
 }
 
@@ -18,14 +18,19 @@ class _HomeScrernState extends State<HomeScrern> {
   int _selectedDrawerIndex = 0;
 
   final drawerItems = [
-    DrawerItem("อัพโหลดไฟล์", null),
+    DrawerItem("หน้าแรก", Icon(Icons.home)),
+    DrawerItem("อัพโหลดไฟล์", Icon(Icons.file_upload)),
+    DrawerItem("อัพโหลดรูปภาพ", Icon(Icons.image)),
   ];
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return MainUploadFile();
+        return FirstScreen();
         break;
       case 1:
+        return MainUploadFile();
+        break;
+      case 2:
         return MainUploadImage();
         break;
       default:
@@ -55,11 +60,28 @@ class _HomeScrernState extends State<HomeScrern> {
           child: ListView.builder(
               itemCount: drawerItems.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                    title: Text(drawerItems[index].title),
-                    onTap: () {
-                      _onClickMenu(index);
-                    });
+                return GestureDetector(
+                  onTap: () {
+                    _onClickMenu(index);
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: Row(
+                      children: [
+                        drawerItems[index].icon != null
+                            ? drawerItems[index].icon
+                            : null,
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(drawerItems[index].title),
+                      ],
+                    ),
+                  ),
+                );
               }),
         ),
       ),
@@ -76,6 +98,8 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Column(
         children: [Text('data')],
       ),

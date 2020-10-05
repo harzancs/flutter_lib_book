@@ -23,12 +23,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  #--Start system
+  #--system
+  font_awesome_flutter: 
   http:
   url_launcher: ^5.5.0
   fluttertoast:
   get_version: ^0.2.2
-  #--End system
+  file_picker: ^2.0.6      #--File
+  image_picker: ^0.6.7+11  #--Image
+  multi_image_picker: ^4.7.14  #--Multiple Image
+  flutter_absolute_path: ^1.0.6
+
 
 
 
