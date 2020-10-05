@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_lib_book/view/upload_image/mutiple.dart';
+import 'package:flutter_lib_book/view/upload_image/multiple.dart';
 import 'package:flutter_lib_book/view/upload_image/single.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,7 +19,10 @@ class _MainUploadImageState extends State<MainUploadImage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           RaisedButton(
             color: Colors.limeAccent,
@@ -37,7 +40,7 @@ class _MainUploadImageState extends State<MainUploadImage> {
           RaisedButton(
             color: Colors.limeAccent,
             child: Text(
-              "หลายรุป",
+              "หลายรูป",
               style: TextStyle(color: Colors.black),
             ),
             onPressed: () {

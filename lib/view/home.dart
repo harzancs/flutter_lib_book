@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lib_book/lang/lang.dart';
 import 'package:flutter_lib_book/view/upload_file/main_screen.dart';
 import 'package:flutter_lib_book/view/upload_image/main_screen.dart';
 
@@ -9,8 +10,9 @@ class HomeScrern extends StatefulWidget {
 
 class DrawerItem {
   String title;
+  String title_lang;
   Icon icon;
-  DrawerItem(this.title, this.icon);
+  DrawerItem(this.title, this.title_lang, this.icon);
 }
 
 class _HomeScrernState extends State<HomeScrern> {
@@ -18,9 +20,9 @@ class _HomeScrernState extends State<HomeScrern> {
   int _selectedDrawerIndex = 0;
 
   final drawerItems = [
-    DrawerItem("หน้าแรก", Icon(Icons.home)),
-    DrawerItem("อัพโหลดไฟล์", Icon(Icons.file_upload)),
-    DrawerItem("อัพโหลดรูปภาพ", Icon(Icons.image)),
+    DrawerItem("หน้าแรก", "KEY_HOME", Icon(Icons.home)),
+    DrawerItem("อัพโหลดไฟล์", "KEY_UPLOAD_FILE", Icon(Icons.file_upload)),
+    DrawerItem("อัพโหลดรูปภาพ", "KEY_UPLOAD_IMAGE", Icon(Icons.image)),
   ];
   _getDrawerItemWidget(int pos) {
     switch (pos) {
@@ -43,6 +45,11 @@ class _HomeScrernState extends State<HomeScrern> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -50,7 +57,10 @@ class _HomeScrernState extends State<HomeScrern> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(drawerItems[_selectedDrawerIndex].title),
+          title: Text(
+            Translations()
+                .load('th', drawerItems[_selectedDrawerIndex].title_lang),
+          ),
         ),
         body: Scaffold(
           key: _scaffoldKey,
@@ -77,7 +87,8 @@ class _HomeScrernState extends State<HomeScrern> {
                         SizedBox(
                           width: 5,
                         ),
-                        Text(drawerItems[index].title),
+                        Text(Translations().load('th',
+                            drawerItems[_selectedDrawerIndex].title_lang)),
                       ],
                     ),
                   ),
