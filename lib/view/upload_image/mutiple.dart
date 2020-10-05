@@ -19,6 +19,7 @@ class _MultipleImagesState extends State<MultipleImages> {
   List<File> files = List<File>();
   String _error = 'No Error Dectected';
 
+  //-Start---------  แสดงรูปภาพ
   Widget buildGridView() {
     return GridView.count(
       crossAxisCount: 3,
@@ -39,7 +40,9 @@ class _MultipleImagesState extends State<MultipleImages> {
       }),
     );
   }
+  //-End---------  แสดงรูปภาพ
 
+  //-Start---------  เข้าไปเลือกรูป Local Device
   Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
@@ -63,9 +66,6 @@ class _MultipleImagesState extends State<MultipleImages> {
       error = e.toString();
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -74,7 +74,9 @@ class _MultipleImagesState extends State<MultipleImages> {
       getFileList();
     });
   }
+  //-End---------  เข้าไปเลือกรูป Local Device
 
+  //-Start---------  Get Path File
   void getFileList() async {
     files.clear();
     for (int i = 0; i < images.length; i++) {
@@ -92,6 +94,7 @@ class _MultipleImagesState extends State<MultipleImages> {
     final file = File(path);
     return file;
   }
+  //-End---------  Get Path File
 
   @override
   void initState() {
