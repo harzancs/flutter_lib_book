@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lib_book/lang/lang.dart';
+import 'package:flutter_lib_book/view/load_more/main.dart';
+import 'package:flutter_lib_book/view/tts/main.dart';
 import 'package:flutter_lib_book/view/upload_file/main_screen.dart';
 import 'package:flutter_lib_book/view/upload_image/main_screen.dart';
 
@@ -10,9 +12,8 @@ class HomeScrern extends StatefulWidget {
 
 class DrawerItem {
   String title;
-  String title_lang;
   Icon icon;
-  DrawerItem(this.title, this.title_lang, this.icon);
+  DrawerItem(this.title, this.icon);
 }
 
 class _HomeScrernState extends State<HomeScrern> {
@@ -20,9 +21,11 @@ class _HomeScrernState extends State<HomeScrern> {
   int _selectedDrawerIndex = 0;
 
   final drawerItems = [
-    DrawerItem("หน้าแรก", "KEY_HOME", Icon(Icons.home)),
-    DrawerItem("อัพโหลดไฟล์", "KEY_UPLOAD_FILE", Icon(Icons.file_upload)),
-    DrawerItem("อัพโหลดรูปภาพ", "KEY_UPLOAD_IMAGE", Icon(Icons.image)),
+    DrawerItem("หน้าแรก", Icon(Icons.home)),
+    DrawerItem("อัพโหลดไฟล์", Icon(Icons.file_upload)),
+    DrawerItem("อัพโหลดรูปภาพ", Icon(Icons.image)),
+    DrawerItem("Text To Speech", Icon(Icons.text_format)),
+    DrawerItem("Load More", Icon(Icons.download_sharp)),
   ];
   _getDrawerItemWidget(int pos) {
     switch (pos) {
@@ -34,6 +37,12 @@ class _HomeScrernState extends State<HomeScrern> {
         break;
       case 2:
         return MainUploadImage();
+        break;
+      case 3:
+        return TextToSpeech();
+        break;
+      case 4:
+        return LoadMorePage();
         break;
       default:
         return FirstScreen();
@@ -57,10 +66,7 @@ class _HomeScrernState extends State<HomeScrern> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            Translations()
-                .load('th', drawerItems[_selectedDrawerIndex].title_lang),
-          ),
+          title: Text(drawerItems[_selectedDrawerIndex].title),
         ),
         body: Scaffold(
           key: _scaffoldKey,
@@ -87,8 +93,7 @@ class _HomeScrernState extends State<HomeScrern> {
                         SizedBox(
                           width: 5,
                         ),
-                        Text(Translations().load('th',
-                            drawerItems[_selectedDrawerIndex].title_lang)),
+                        Text(drawerItems[index].title)
                       ],
                     ),
                   ),
