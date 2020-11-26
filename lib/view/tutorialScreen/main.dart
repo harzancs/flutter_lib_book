@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_lib_book/view/tutorialScreen/frienddetails/friend_details_page.dart';
-import 'package:flutter_lib_book/view/tutorialScreen/model/friend.dart';
 import 'package:highlighter_coachmark/highlighter_coachmark.dart';
-import 'package:http/http.dart' as http;
 
 class TutorialMain extends StatefulWidget {
   @override
