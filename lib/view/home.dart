@@ -1,9 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_lib_book/lang/lang.dart';
-import 'package:flutter_lib_book/view/load_more/main.dart';
-import 'package:flutter_lib_book/view/tts/main.dart';
-import 'package:flutter_lib_book/view/upload_file/main_screen.dart';
-import 'package:flutter_lib_book/view/upload_image/main_screen.dart';
+import 'package:flutter_lib_book/view/menu.dart';
+import 'package:highlighter_coachmark/highlighter_coachmark.dart';
 
 class HomeScrern extends StatefulWidget {
   @override
@@ -19,35 +18,6 @@ class DrawerItem {
 class _HomeScrernState extends State<HomeScrern> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedDrawerIndex = 0;
-
-  final drawerItems = [
-    DrawerItem("หน้าแรก", Icon(Icons.home)),
-    DrawerItem("อัพโหลดไฟล์", Icon(Icons.file_upload)),
-    DrawerItem("อัพโหลดรูปภาพ", Icon(Icons.image)),
-    DrawerItem("Text To Speech", Icon(Icons.text_format)),
-    DrawerItem("Load More", Icon(Icons.download_sharp)),
-  ];
-  _getDrawerItemWidget(int pos) {
-    switch (pos) {
-      case 0:
-        return FirstScreen();
-        break;
-      case 1:
-        return MainUploadFile();
-        break;
-      case 2:
-        return MainUploadImage();
-        break;
-      case 3:
-        return TextToSpeech();
-        break;
-      case 4:
-        return LoadMorePage();
-        break;
-      default:
-        return FirstScreen();
-    }
-  }
 
   _onClickMenu(index) {
     setState(() => _selectedDrawerIndex = index);
@@ -66,15 +36,15 @@ class _HomeScrernState extends State<HomeScrern> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(drawerItems[_selectedDrawerIndex].title),
+          title: Text(Menu().drawerItems[_selectedDrawerIndex].title),
         ),
         body: Scaffold(
           key: _scaffoldKey,
-          body: _getDrawerItemWidget(_selectedDrawerIndex),
+          body: Menu().getDrawerItemWidget(_selectedDrawerIndex),
         ),
         drawer: Drawer(
           child: ListView.builder(
-              itemCount: drawerItems.length,
+              itemCount: Menu().drawerItems.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -87,13 +57,13 @@ class _HomeScrernState extends State<HomeScrern> {
                     height: 50,
                     child: Row(
                       children: [
-                        drawerItems[index].icon != null
-                            ? drawerItems[index].icon
+                        Menu().drawerItems[index].icon != null
+                            ? Menu().drawerItems[index].icon
                             : null,
                         SizedBox(
                           width: 5,
                         ),
-                        Text(drawerItems[index].title)
+                        Text(Menu().drawerItems[index].title)
                       ],
                     ),
                   ),
@@ -111,6 +81,12 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
